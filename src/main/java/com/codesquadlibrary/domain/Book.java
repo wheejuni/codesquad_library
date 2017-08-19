@@ -1,11 +1,72 @@
 package com.codesquadlibrary.domain;
 
-public class Book {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.codesquadlibrary.handler.TimeStringHandler;
+
+@Entity
+public class Book {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	long uniqueid;
+	
+	@Column(nullable = false, unique = false, length = 25)
 	private String author;
+	
+	@Column(nullable = false, unique = false, length = 25)
 	private String publisher;
+	
+	@Column(nullable = false)
 	private boolean isPossessed;
+	
+	@Column(nullable = false, unique = false, length = 25)
 	private String title;
+	
+	@Column(nullable = true)
+	private String picturePath;
+	
+	@Column(nullable = true)
+	private String lastRentDate;
+	
+	@ManyToOne
+	@JoinColumn (foreignKey = @ForeignKey(name = "fk_books_user"))
+	private User user;
+	
+	public User getUser() {
+		return this.user;
+	}
+	
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public String getLastRentDate() {
+		return this.lastRentDate;
+	}
+	
+	public void setLastRentDate() {
+		this.lastRentDate = TimeStringHandler.getTimeStamp();
+	}
+	
+	public String getPicturePath() {
+		if (this.picturePath == null) {
+			return "default";
+		}
+		return this.picturePath;
+	}
+	
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
+	}
 
 	public String getTitle() {
 		return title;
