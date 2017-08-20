@@ -120,11 +120,11 @@ public class BookInfoController {
 		}
 
 		if (loggedUser == null) {
-			return "books/loginfail";
+			return "users/loginfail";
 		}
 
 		if (loggedUser.isAdmin() == false) {
-			return "books/loginfail";
+			return "users/adminfail";
 		}
 
 		String filename = RandomStringGenerator.randomStringFactory(10);
