@@ -44,6 +44,19 @@ public class UserInfoController {
 		return mylist;
 	}
 	
+	@GetMapping("/user/myuserinfo")
+	public ModelAndView editMyInfo(HttpSession session) {
+		ModelAndView mydetails = new ModelAndView("users/modify");
+		User loggedUser = (User) session.getAttribute("loginuser");
+		if (loggedUser == null) {
+			return new ModelAndView("users/nologinfail");
+		}
+		User actualUser = userRepo.findOne(loggedUser.getUserId());
+		
+		mydetails.addObject("myinfo", actualUser);
+		return mydetails;
+	}
+	
 	@GetMapping("/user/admin")
 	public ModelAndView getAdminPage(HttpSession session) {
 		ModelAndView admin = new ModelAndView("users/admin");
