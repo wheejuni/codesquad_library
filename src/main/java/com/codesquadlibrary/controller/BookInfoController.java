@@ -99,6 +99,16 @@ public class BookInfoController {
 		String dest = book.getPicturePath();
 		return "redirect:https://s3.ap-northeast-2.amazonaws.com/codesquad-library/" + dest;
 	}
+	
+	@GetMapping("/books/new")
+	public String getNewBookForm(HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loginuser");
+		if (loggedUser.isAdmin()) {
+			return "books/new";
+		}
+		return "users/adminfail";
+	}
+	
 
 	@PostMapping("/books/new")
 	public String newBook(Book book) {
