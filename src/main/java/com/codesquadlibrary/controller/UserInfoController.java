@@ -42,6 +42,17 @@ public class UserInfoController {
 		mylist.addObject("booklist", actualUser.getBookRentalList());
 		return mylist;
 	}
+	
+	@GetMapping("/user/admin")
+	public ModelAndView getAdminPage(HttpSession session) {
+		ModelAndView admin = new ModelAndView("users/admin");
+		User loggedUser = (User) session.getAttribute("loginuser");
+		if (loggedUser.isAdmin()) {
+			admin.addObject("userlist", userRepo.findAll());
+			return admin;
+		}
+		return new ModelAndView("books/loginfail");
+	}
 
 	@PostMapping("/user/login")
 	public String getLoginResult(User user, HttpSession session) {
