@@ -46,7 +46,7 @@ public class UserInfoController {
 	
 	@GetMapping("/user/myuserinfo")
 	public ModelAndView editMyInfo(HttpSession session) {
-		ModelAndView mydetails = new ModelAndView("users/modify");
+		ModelAndView mydetails = new ModelAndView("users/detail");
 		User loggedUser = (User) session.getAttribute("loginuser");
 		if (loggedUser == null) {
 			return new ModelAndView("users/nologinfail");
@@ -109,6 +109,17 @@ public class UserInfoController {
 		}
 		
 		return new ModelAndView("users/adminfail");
+	}
+	
+	@GetMapping("/user/photo/{userid}")
+	public String getPhotoEditForm(@PathVariable long userid, HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loginuser");
+		User actualUser = userRepo.findOne(userid);
+		if (actualUser.getUserId() == loggedUser.getUserId()) {
+			return "users/photoupload";
+		}
+		
+		return "redirect:https://s3.ap-northeast-2.amazonaws.com/codesquad-library-user/" + actualUser.getProfilePath();
 	}
 
 }

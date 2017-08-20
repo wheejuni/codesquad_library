@@ -50,10 +50,14 @@
         <div class="collapse navbar-collapse" id="navbar-collapse2">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="/">초기화면</a></li>
+                {{^loginuser}}
                 <li><a href="/user/login" role="button">로그인</a></li>
                 <li><a href="/user/join" role="button">회원가입</a></li>
+                {{/loginuser}}
+                {{#loginuser}}
                 <li><a href="/user/logout" role="button">로그아웃</a></li>
                 <li><a href="/user/mypage" role="button">대출정보관리</a></li>
+                {{/loginuser}}
             </ul>
         </div>
     </div>

@@ -89,6 +89,9 @@ public class User {
 	}
 
 	public String getProfilePath() {
+		if (this.profilePath == null) {
+			return "default";
+		}
 		return this.profilePath;
 	}
 
