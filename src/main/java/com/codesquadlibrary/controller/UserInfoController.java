@@ -63,7 +63,7 @@ public class UserInfoController {
 			return "redirect:/";
 		}
 
-		return "login/fail";
+		return "books/loginfail";
 	}
 	
 	@GetMapping("/user/logout")
