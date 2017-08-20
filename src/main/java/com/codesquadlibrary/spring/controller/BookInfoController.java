@@ -83,6 +83,7 @@ public class BookInfoController {
 			return "books/returnerror";
 		}
 		returnBook.setPossessed(false);
+		returnBook.setUser(null);
 		bookRepo.save(returnBook);
 		return "books/returnsuccess";
 	}
