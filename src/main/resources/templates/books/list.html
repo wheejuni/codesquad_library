@@ -21,12 +21,12 @@
 					<tbody>
 						{{#books}}
 						<tr>
-							<th scope="row">{{@index}}</th>
-							<td><a href="./books/{{uniqueid}}">{{title}}</a></td>
+							
+							<td><a href="/books/{{uniqueid}}">{{title}}</a></td>
 							<td>{{publisher}}</td>
 							<td>{{author}}</td>
 							{{^isPossessed}}
-							<td><a href="./books/{{uniqueid}}/rent"
+							<td><a href="/books/{{uniqueid}}/rent"
 								class="btn btn-success" role="button">대출가능</a></td>
 							{{/isPossessed}}
 							{{#isPossessed}}

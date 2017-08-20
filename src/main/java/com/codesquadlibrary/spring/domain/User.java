@@ -28,7 +28,7 @@ public class User {
 	@Column(nullable = false, unique = true, length = 25)
 	private String loginid;
 	
-	@Column(nullable = false, unique = true, length = 25)
+	@Column(nullable = false, unique = false, length = 25)
 	@JsonIgnore
 	private String pwd;
 	

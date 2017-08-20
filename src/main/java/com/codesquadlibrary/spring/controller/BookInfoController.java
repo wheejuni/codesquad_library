@@ -117,7 +117,7 @@ public class BookInfoController {
 	@GetMapping("/books/new")
 	public String getNewBookForm(HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loginuser");
-		if (loggedUser.isAdmin()) {
+		if (loggedUser != null && loggedUser.isAdmin()) {
 			return "books/new";
 		}
 		return "users/adminfail";

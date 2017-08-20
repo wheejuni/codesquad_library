@@ -21,11 +21,11 @@
 					<tbody>
 						{{#booklist}}
 						<tr>
-							<th scope="row">{{@index}}</th>
-							<td><a href="./books/{{uniqueid}}">{{title}}</a></td>
+							
+							<td><a href="/books/{{uniqueid}}">{{title}}</a></td>
 							<td>{{publisher}}</td>
 							<td>{{lastRentDate}}</td>
-							<td><a href="./books/{{uniqueid}}/return"
+							<td><a href="/books/{{uniqueid}}/return"
 								class="btn btn-success" role="button">반납</a></td>
 						</tr>
 						{{/booklist}}

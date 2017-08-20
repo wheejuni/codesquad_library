@@ -38,6 +38,8 @@
                 <li><a href="/user/mypage"><i class="glyphicon glyphicon-user" style="color:#1111dd;"></i> Profile</a></li>
                 <li class="nav-divider"></li>
                 <li><a href="/user/admin"><i class="glyphicon glyphicon-cog" style="color:#dd1111;"></i> Settings</a></li>
+                <li class="nav-divider"></li>
+                <li><a href="/books/new"><i class="glyphicon glyphicon-lamp"></i>신규 도서 등록</a></li>
             </ul>
             
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse2">
@@ -50,14 +52,14 @@
         <div class="collapse navbar-collapse" id="navbar-collapse2">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="/">초기화면</a></li>
-                {{^loginuser}}
+                {{^loggedUser}}
                 <li><a href="/user/login" role="button">로그인</a></li>
                 <li><a href="/user/join" role="button">회원가입</a></li>
-                {{/loginuser}}
-                {{#loginuser}}
+                {{/loggedUser}}
+                {{#loggedUser}}
                 <li><a href="/user/logout" role="button">로그아웃</a></li>
                 <li><a href="/user/mypage" role="button">대출정보관리</a></li>
-                {{/loginuser}}
+                {{/loggedUser}}
             </ul>
         </div>
     </div>

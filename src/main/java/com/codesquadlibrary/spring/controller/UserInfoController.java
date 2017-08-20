@@ -61,7 +61,7 @@ public class UserInfoController {
 	public ModelAndView getAdminPage(HttpSession session) {
 		ModelAndView admin = new ModelAndView("users/admin");
 		User loggedUser = (User) session.getAttribute("loginuser");
-		if (loggedUser.isAdmin()) {
+		if (loggedUser != null && loggedUser.isAdmin()) {
 			admin.addObject("userlist", userRepo.findAll());
 			return admin;
 		}
@@ -72,6 +72,9 @@ public class UserInfoController {
 	@PostMapping("/user/login")
 	public String getLoginResult(String id, String password, HttpSession session) {
 		User destUser = userRepo.findByLoginid(id);
+		if (destUser == null) {
+			return "users/loginfail";
+		}
 		if (destUser.isLoginSuccess(id, password)) {
 			session.setAttribute("loginuser", destUser);
 			return "redirect:/";
@@ -102,7 +105,7 @@ public class UserInfoController {
 	public ModelAndView getUserDetail(@PathVariable long userid, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loginuser");
 		User detailUser = userRepo.findOne(userid);
-		if (loggedUser.isAdmin()) {
+		if (loggedUser != null && loggedUser.isAdmin()) {
 			ModelAndView userinfo = new ModelAndView("users/detail");
 			userinfo.addObject("userinfo", detailUser);
 			return userinfo;

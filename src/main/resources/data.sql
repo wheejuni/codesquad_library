@@ -1,0 +1,2 @@
+INSERT INTO user(userid, email, is_admin, loginid, name, profile_path, pwd, slack_id) VALUES (1, 'wheejuni@me.com', 1, 'wheejuni', '정휘준', null, '1234', 'wheejuni'); 
+INSERT INTO user(userid, email, is_admin, loginid, name, profile_path, pwd, slack_id) VALUES (2, 'seulgi@smtown.com', 0, 'seulgi', '강슬기', null, '1234', 'seulgi'); 
