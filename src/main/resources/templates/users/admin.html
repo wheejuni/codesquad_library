@@ -19,16 +19,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						{{#users}}
+						{{#userlist}}
 						<tr>
-							<th scope="row">{{@index}}</th>
+							<th scope="row">1</th>
 							<td><a href="./user/{{userid}}">{{loginid}}</a></td>
 							<td>{{name}}</td>
 							<td>{{slackId}}</td>
-							<td><a href="./users/modify/{{uniqueId}}"
+							<td><a href="./users/modify/{{userid}}"
 								class="btn btn-success" role="button">수정</a></td>
 						</tr>
-						{{/users}}
+						{{/userlist}}
 					</tbody>
 				</table>
 			</div>
