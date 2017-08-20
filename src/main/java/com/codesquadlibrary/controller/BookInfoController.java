@@ -86,6 +86,20 @@ public class BookInfoController {
 		bookRepo.save(returnBook);
 		return "books/returnsuccess";
 	}
+	
+	@GetMapping("/books/{uniqueId}/modify")
+	public String modifyBook(@PathVariable long uniqueId, Model model, HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loginuser");
+		Book targetBook = bookRepo.findByUniqueid(uniqueId);
+		if (targetBook == null) {
+			return "books/noinfofail";
+		}
+		if (loggedUser.isAdmin()) {
+			model.addAttribute("bookid", uniqueId);
+			return "books/edit";
+		}
+		return "users/adminfail";
+	}
 
 	@GetMapping("/books/photo/{uniqueId}")
 
