@@ -56,9 +56,9 @@ public class UserInfoController {
 	}
 
 	@PostMapping("/user/login")
-	public String getLoginResult(User user, HttpSession session) {
-		User destUser = userRepo.findByLoginid(user.getLoginid());
-		if (destUser.isLoginSuccess(user)) {
+	public String getLoginResult(String id, String password, HttpSession session) {
+		User destUser = userRepo.findByLoginid(id);
+		if (destUser.isLoginSuccess(id, password)) {
 			session.setAttribute("loginuser", destUser);
 			return "redirect:/";
 		}

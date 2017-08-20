@@ -120,8 +120,8 @@ public class User {
 		this.slackId = slackId;
 	}
 
-	public boolean isLoginSuccess(User user) {
-		if (this.loginid.equals(user.getLoginid()) && this.pwd.equals(user.getPwd())) {
+	public boolean isLoginSuccess(String id, String password) {
+		if (this.loginid.equals(id) && this.pwd.equals(password)) {
 			return true;
 		}
 		return false;
