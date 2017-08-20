@@ -75,7 +75,7 @@ public class BookInfoController {
 
 	}
 
-	@GetMapping("/books/[uniqueId}/return")
+	@GetMapping("/books/{uniqueId}/return")
 	public String returnBook(@PathVariable long uniqueId, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loginuser");
 		Book returnBook = bookRepo.findByUniqueid(uniqueId);
