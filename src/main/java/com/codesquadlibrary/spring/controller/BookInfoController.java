@@ -58,8 +58,12 @@ public class BookInfoController {
 	@GetMapping("/books/{uniqueId}/rent")
 	public String rentBook(@PathVariable long uniqueId, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loginuser");
+		if (loggedUser == null) {
+			return "users/nologinfail";
+		}
 		User actualUser = userRepo.findOne(loggedUser.getUserId());
 		Book selectedBook = bookRepo.findByUniqueid(uniqueId);
+		
 		if (selectedBook.isPossessed()) {
 			return "books/renterror";
 		}
@@ -112,7 +116,7 @@ public class BookInfoController {
 			return "books/photoedit";
 		}
 		String dest = book.getPicturePath();
-		return "redirect:https://s3.ap-northeast-2.amazonaws.com/codesquad-library/" + dest;
+		return "redirect:https://s3.ap-northeast-2.amazonaws.com/codesquad-library-book/" + dest;
 	}
 	
 	@GetMapping("/books/new")
