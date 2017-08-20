@@ -1,8 +1,8 @@
-package com.codesquadlibrary.repositories;
+package com.codesquadlibrary.spring.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.codesquadlibrary.domain.User;
+import com.codesquadlibrary.spring.domain.User;
 
 public interface UserRepository extends CrudRepository <User, Long>{
 	

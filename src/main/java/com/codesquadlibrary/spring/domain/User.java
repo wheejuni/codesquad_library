@@ -1,4 +1,4 @@
-package com.codesquadlibrary.domain;
+package com.codesquadlibrary.spring.domain;
 
 import java.util.ArrayList;
 import java.util.List;

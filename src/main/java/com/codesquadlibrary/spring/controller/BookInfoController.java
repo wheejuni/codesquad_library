@@ -1,4 +1,4 @@
-package com.codesquadlibrary.controller;
+package com.codesquadlibrary.spring.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.codesquadlibrary.domain.Book;
-import com.codesquadlibrary.domain.User;
-import com.codesquadlibrary.handler.ImageRequestHandler;
-import com.codesquadlibrary.handler.RandomStringGenerator;
-import com.codesquadlibrary.repositories.BookRepository;
-import com.codesquadlibrary.repositories.UserRepository;
+import com.codesquadlibrary.spring.domain.Book;
+import com.codesquadlibrary.spring.domain.User;
+import com.codesquadlibrary.spring.handler.ImageRequestHandler;
+import com.codesquadlibrary.spring.handler.RandomStringGenerator;
+import com.codesquadlibrary.spring.repositories.BookRepository;
+import com.codesquadlibrary.spring.repositories.UserRepository;
 
 @Controller
 public class BookInfoController {

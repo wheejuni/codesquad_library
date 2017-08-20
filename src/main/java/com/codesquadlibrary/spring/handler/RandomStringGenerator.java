@@ -1,4 +1,4 @@
-package com.codesquadlibrary.handler;
+package com.codesquadlibrary.spring.handler;
 
 import java.util.Random;
 

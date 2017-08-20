@@ -1,4 +1,4 @@
-package com.codesquadlibrary.controller;
+package com.codesquadlibrary.spring.controller;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.codesquadlibrary.domain.User;
-import com.codesquadlibrary.repositories.UserRepository;
+import com.codesquadlibrary.spring.domain.User;
+import com.codesquadlibrary.spring.repositories.UserRepository;
 
 @Controller
 public class UserInfoController {
@@ -94,7 +94,7 @@ public class UserInfoController {
 		if (user.getLoginid() == null || user.getPwd() == null || user.getSlackId() == null) {
 			return "users/joinfail";
 		}
-
+		userRepo.save(user);
 		return "users/joinsuccess";
 	}
 	

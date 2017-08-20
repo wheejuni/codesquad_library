@@ -1,8 +1,8 @@
-package com.codesquadlibrary.repositories;
+package com.codesquadlibrary.spring.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.codesquadlibrary.domain.Book;
+import com.codesquadlibrary.spring.domain.Book;
 
 public interface BookRepository extends CrudRepository<Book, Long>{
 	

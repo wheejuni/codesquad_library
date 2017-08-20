@@ -1,4 +1,4 @@
-package com.codesquadlibrary.domain;
+package com.codesquadlibrary.spring.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.codesquadlibrary.handler.TimeStringHandler;
+import com.codesquadlibrary.spring.handler.TimeStringHandler;
 
 @Entity
 public class Book {
