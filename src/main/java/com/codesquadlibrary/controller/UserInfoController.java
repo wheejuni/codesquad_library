@@ -65,6 +65,12 @@ public class UserInfoController {
 
 		return "login/fail";
 	}
+	
+	@GetMapping("/user/logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("loginuser", null);
+		return "redirect:/";
+	}
 
 	@PostMapping("/user/join")
 	public String getJoinResult(User user) {
