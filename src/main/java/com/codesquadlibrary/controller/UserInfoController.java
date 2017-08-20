@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -82,6 +83,19 @@ public class UserInfoController {
 		}
 
 		return "users/joinsuccess";
+	}
+	
+	@GetMapping("/user/{userid}")
+	public ModelAndView getUserDetail(@PathVariable long userid, HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loginuser");
+		User detailUser = userRepo.findOne(userid);
+		if (loggedUser.isAdmin()) {
+			ModelAndView userinfo = new ModelAndView("users/detail");
+			userinfo.addObject("userinfo", detailUser);
+			return userinfo;
+		}
+		
+		return new ModelAndView("users/adminfail");
 	}
 
 }
