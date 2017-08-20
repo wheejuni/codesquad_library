@@ -52,6 +52,7 @@ public class UserInfoController {
 			return admin;
 		}
 		return new ModelAndView("books/loginfail");
+	
 	}
 
 	@PostMapping("/user/login")
