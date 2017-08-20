@@ -76,7 +76,7 @@ public class UserInfoController {
 	@PostMapping("/user/join")
 	public String getJoinResult(User user) {
 
-		ArrayList<User> users = (ArrayList<User>) userRepo.findAll();
+		//ArrayList<User> users = (ArrayList<User>) userRepo.findAll();
 
 		if (user.getLoginid() == null || user.getPwd() == null || user.getSlackId() == null) {
 			return "users/joinfail";
