@@ -36,7 +36,7 @@ public class UserInfoController {
 		ModelAndView mylist = new ModelAndView("users/list");
 		User loggedUser = (User) session.getAttribute("loginuser");
 		if (loggedUser == null) {
-			return new ModelAndView("books/loginfail");
+			return new ModelAndView("users/nologinfail");
 		}
 		User actualUser = userRepo.findOne(loggedUser.getUserId());
 		
@@ -52,7 +52,7 @@ public class UserInfoController {
 			admin.addObject("userlist", userRepo.findAll());
 			return admin;
 		}
-		return new ModelAndView("books/loginfail");
+		return new ModelAndView("users/adminfail");
 	
 	}
 
@@ -64,7 +64,7 @@ public class UserInfoController {
 			return "redirect:/";
 		}
 
-		return "books/loginfail";
+		return "users/loginfail";
 	}
 	
 	@GetMapping("/user/logout")
