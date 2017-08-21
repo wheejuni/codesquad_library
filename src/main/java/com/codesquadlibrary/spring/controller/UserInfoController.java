@@ -38,7 +38,7 @@ public class UserInfoController {
 		if (loggedUser == null) {
 			return new ModelAndView("users/nologinfail");
 		}
-		User actualUser = userRepo.findOne(loggedUser.getUserId());
+		User actualUser = userRepo.findOne(loggedUser.getUserid());
 		
 		mylist.addObject("booklist", actualUser.getBookRentalList());
 		return mylist;
@@ -51,9 +51,9 @@ public class UserInfoController {
 		if (loggedUser == null) {
 			return new ModelAndView("users/nologinfail");
 		}
-		User actualUser = userRepo.findOne(loggedUser.getUserId());
+		User actualUser = userRepo.findOne(loggedUser.getUserid());
 		
-		mydetails.addObject("myinfo", actualUser);
+		mydetails.addObject("userinfo", actualUser);
 		return mydetails;
 	}
 	
@@ -118,7 +118,7 @@ public class UserInfoController {
 	public String getPhotoEditForm(@PathVariable long userid, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loginuser");
 		User actualUser = userRepo.findOne(userid);
-		if (actualUser.getUserId() == loggedUser.getUserId()) {
+		if (actualUser.getUserid() == loggedUser.getUserid()) {
 			return "users/photoupload";
 		}
 		

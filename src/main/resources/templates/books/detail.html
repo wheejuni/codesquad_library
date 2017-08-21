@@ -21,12 +21,12 @@
                             <h4 class="media-heading">{{title}}</h4>
                             <p>
                                 <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-pencil"></span>&nbsp;{{author}}</a>
-                                {{^isPossessed}}
+                                {{^user}}
                                 <a href="/books/{{uniqueid}}/rent" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;대출가능</a>
-                                {{/isPossessed}}
-                                {{#isPossessed}}
+                                {{/user}}
+                                {{#user}}
                                 <a class = "btn btn-xs btn-default"><span class="glyphicon glyphicon-remove"></span>&nbsp;대출중 : {{user.name}}</a>
-                                {{/isPossessed}}
+                                {{/user}}
                                 <br>
                                 
                             </p>

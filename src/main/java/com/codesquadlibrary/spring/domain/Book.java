@@ -40,6 +40,19 @@ public class Book {
 	@JoinColumn (foreignKey = @ForeignKey(name = "fk_books_user"))
 	private User user;
 	
+	
+	
+	
+	public long getUniqueid() {
+		return uniqueid;
+	}
+
+
+	public void setUniqueid(long uniqueid) {
+		this.uniqueid = uniqueid;
+	}
+
+
 	public User getUser() {
 		return this.user;
 	}

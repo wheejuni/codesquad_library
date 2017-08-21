@@ -61,7 +61,7 @@ public class BookInfoController {
 		if (loggedUser == null) {
 			return "users/nologinfail";
 		}
-		User actualUser = userRepo.findOne(loggedUser.getUserId());
+		User actualUser = userRepo.findOne(loggedUser.getUserid());
 		Book selectedBook = bookRepo.findByUniqueid(uniqueId);
 		
 		if (selectedBook.isPossessed()) {
@@ -83,7 +83,7 @@ public class BookInfoController {
 	public String returnBook(@PathVariable long uniqueId, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loginuser");
 		Book returnBook = bookRepo.findByUniqueid(uniqueId);
-		if (returnBook.getUser().getUserId() != loggedUser.getUserId()) {
+		if (returnBook.getUser().getUserid() != loggedUser.getUserid()) {
 			return "books/returnerror";
 		}
 		returnBook.setPossessed(false);

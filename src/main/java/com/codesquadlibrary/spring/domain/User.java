@@ -17,7 +17,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long userid;
+	long userid;
 	
 	@Column(nullable = true)
 	private boolean isAdmin;
@@ -60,8 +60,12 @@ public class User {
 	}
 	
 	
-	public long getUserId() {
+	public long getUserid() {
 		return this.userid;
+	}
+	
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
 
 	public boolean isAdmin() {
