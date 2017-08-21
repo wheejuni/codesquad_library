@@ -29,3 +29,10 @@
 1. 정휘준 / @wheejuni
 2. 이태현 / @chocozero
 3. 이장희 / @yesdoing
+
+### 프로젝트 Wireframe 공유
+***
+
+#### 프로젝트의 UI 기획안을 와이어프레임으로 공유합니다. 카카오 오븐(<http://ovenapp.io>) 가입 후 계정을 알려주시면, 수정 권한을 드립니다.)
+
+프로젝트 페이지 바로가기: <https://goo.gl/Mi7FWG>
