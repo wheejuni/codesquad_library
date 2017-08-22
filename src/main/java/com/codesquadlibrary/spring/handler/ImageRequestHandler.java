@@ -19,11 +19,11 @@ public class ImageRequestHandler {
 
 		AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
 
-		File outfile = new File("/" + filepath + ".jpg"); 
+		File outfile = new File("/tmp/" + filepath + ".jpg"); 
 		ImageIO.write(img, ".jpg", outfile);
 
 		try {
-			s3client.putObject(new PutObjectRequest("codesquad-library", filepath, outfile)
+			s3client.putObject(new PutObjectRequest("codesquad-library-book", filepath, outfile)
 					.withCannedAcl(CannedAccessControlList.PublicRead));
 			return true;
 		} catch (AmazonServiceException ase) {

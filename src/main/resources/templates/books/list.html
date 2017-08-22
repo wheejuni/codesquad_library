@@ -28,10 +28,10 @@
 							<td>{{author}}</td>
 							{{^user}}
 							<td><a href="/books/{{uniqueid}}/rent"
-								class="btn btn-success" role="button">대출가능</a></td>
+								class="btn btn-success" role="button"><span style = "color:white" class = "glyphicon glyphicon-ok"></span>  대출가능</a></td>
 							{{/user}}
 							{{#user}}
-							<td>대출중</td>
+							<td><a class="btn btn-danger"><span style = "color:white" class = "glyphicon glyphicon-remove"></span>  대출중  </a></td>
 							{{/user}}
 						</tr>
 						{{/books}}

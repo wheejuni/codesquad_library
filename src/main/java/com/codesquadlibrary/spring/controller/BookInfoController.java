@@ -2,6 +2,7 @@ package com.codesquadlibrary.spring.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -111,7 +112,7 @@ public class BookInfoController {
 	public String returnForm(@PathVariable long uniqueId, Model model, HttpSession session) {
 		Book book = bookRepo.findByUniqueid(uniqueId);
 		User loggedUser = (User) session.getAttribute("loginuser");
-		if (loggedUser.isAdmin()) {
+		if (loggedUser != null && loggedUser.isAdmin()) {
 			model.addAttribute("bookinfo", book);
 			return "books/photoedit";
 		}
@@ -159,7 +160,9 @@ public class BookInfoController {
 		String filename = RandomStringGenerator.randomStringFactory(10);
 		byte[] uploadedBytes = fileUpload.getBytes();
 		BufferedImage img = ImageIO.read(new ByteArrayInputStream(uploadedBytes));
-
+		
+		File outfile = new File("/tmp/" + filename + ".jpg");
+		ImageIO.write(img, "jpg", outfile);
 		book.setPicturePath(filename);
 		if (ImageRequestHandler.ImageInputRequest(img, filename)) {
 			System.out.println("S3 업로드에 성공함");
