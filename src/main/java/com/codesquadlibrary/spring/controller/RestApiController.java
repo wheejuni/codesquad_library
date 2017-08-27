@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codesquadlibrary.spring.domain.Book;
 import com.codesquadlibrary.spring.domain.User;
 import com.codesquadlibrary.spring.handler.QrCodeMaker;
+import com.codesquadlibrary.spring.handler.RentalRequestHandler;
 import com.codesquadlibrary.spring.repositories.BookRepository;
 import com.codesquadlibrary.spring.repositories.UserRepository;
 import com.google.zxing.WriterException;
@@ -65,10 +66,7 @@ public class RestApiController {
 			return "api fail message";
 
 		}
-
-		book.setUser(user);
-		book.setPossessed(true);
-		bookRepo.save(book);
+		RentalRequestHandler.rentalRequestWithUniquecode(bookcode, user);
 		return "success message";
 
 	}
