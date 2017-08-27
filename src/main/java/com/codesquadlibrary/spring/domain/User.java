@@ -42,7 +42,7 @@ public class User {
 	@Column(nullable = true, unique = true, length = 25)
 	private String profilePath;
 	
-	@Column(nullable = true, unique = true, length = 8)
+	@Column(nullable = true, unique = true, length = 10)
 	private String uniquecode;
 
 	@OneToMany(mappedBy = "user")
