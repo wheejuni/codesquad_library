@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.codesquadlibrary.spring.handler.RandomStringGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -40,6 +41,9 @@ public class User {
 	
 	@Column(nullable = true, unique = true, length = 25)
 	private String profilePath;
+	
+	@Column(nullable = true, unique = true, length = 8)
+	private String uniquecode;
 
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
@@ -132,6 +136,14 @@ public class User {
 			return true;
 		}
 		return false;
+	}
+	
+	public String getUniquecode() {
+		return this.uniquecode;
+	}
+	
+	public void setUniquecode() {
+		this.uniquecode = RandomStringGenerator.randomStringFactory(10);
 	}
 
 }

@@ -97,6 +97,7 @@ public class UserInfoController {
 		if (user.getLoginid() == null || user.getPwd() == null || user.getSlackId() == null) {
 			return "users/joinfail";
 		}
+		user.setUniquecode();
 		userRepo.save(user);
 		return "users/joinsuccess";
 	}

@@ -7,5 +7,6 @@ import com.codesquadlibrary.spring.domain.User;
 public interface UserRepository extends CrudRepository <User, Long>{
 	
 	User findByLoginid(String loginid);
+	User findByUniquecode(String uniquecode);
 
 }
