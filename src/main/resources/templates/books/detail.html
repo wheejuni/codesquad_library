@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="kr">
-<head>
-{{> include/header}}
-</head>
-<body>
-{{> include/nav}}
-
+{{#partial "contents"}}
 <div class="container" id="main">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
@@ -28,7 +21,6 @@
                                 <a class = "btn btn-xs btn-default"><span class="glyphicon glyphicon-remove"></span>&nbsp;대출중 : {{user.name}}</a>
                                 {{/user}}
                                 <br>
-                                
                             </p>
                         </div>
                         {{/book}}
@@ -38,8 +30,6 @@
         </div>
     </div>
 </div>
+{{/partial}}
 
-<!-- script references -->
-{{> include/footer}}
-	</body>
-</html>
+{{> layout}}
