@@ -1,47 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-{{> include/header}}
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-{{> include/nav}}
+{{#partial "contents"}}
 {{#bookinfo}}
 <div class="container">
-      <div class="panel panel-default">
+    <div class="panel panel-default">
         <div class="panel-heading"><strong>Upload Files</strong> <small>Bootstrap files upload</small></div>
         <div class="panel-body">
-
-          <!-- Standar Form -->
-          <h4>프로필 사진 선택</h4>
-          <form action="/books/photo/{{uniqueid}}" method="post" enctype="multipart/form-data" id="js-upload-form">
+            <!-- Standar Form -->
+            <h4>프로필 사진 선택</h4>
+            <form action="/books/photo/{{uniqueid}}" method="post" enctype="multipart/form-data" id="js-upload-form">
             <div class="form-inline">
-              <div class="form-group">
-                <input type="file" name="pic" id="js-upload-files" multiple>
-              </div>
-              <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">업로드</button>
+                <div class="form-group">
+                    <input type="file" name="pic" id="js-upload-files" multiple>
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">업로드</button>
             </div>
-          </form>
+            </form>
 
-          <!-- Drop Zone -->
-          <h4>귀찮으면 그냥 파일을 드래그 앤 드롭 하세요.</h4>
-          <div class="upload-drop-zone" id="drop-zone">
-            여기에 파일을 끌어놓으세요.
-            사진은 80 * 80 크기로 리사이즈됩니다. 
-          </div>
+            <!-- Drop Zone -->
+            <h4>귀찮으면 그냥 파일을 드래그 앤 드롭 하세요.</h4>
+            <div class="upload-drop-zone" id="drop-zone">
+                여기에 파일을 끌어놓으세요.
+                사진은 80 * 80 크기로 리사이즈됩니다. 
+            </div>
 
-          <!-- Progress Bar -->
-   
+            <!-- Progress Bar -->
 
-          <!-- Upload Finished -->
-         
+            <!-- Upload Finished -->
+            
         </div>
-      </div>
-      {{/bookinfo}}
-    </div> <!-- /container -->
-    <script src = "http://spin.js.org/spin.js"></script>
-    <script src = "https://s3.ap-northeast-2.amazonaws.com/codesquad-webapp-scripts/spinner.js"></script>
-{{> include/footer}}
-</body>
-</html>
+    </div>
+    {{/bookinfo}}
+</div> <!-- /container -->
+<script src = "http://spin.js.org/spin.js"></script>
+<script src = "https://s3.ap-northeast-2.amazonaws.com/codesquad-webapp-scripts/spinner.js"></script>
+{{/partial}}
+
+{{> layout}}

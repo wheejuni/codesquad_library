@@ -1,37 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>{{> include/header}}
+{{#partial "contents"}}
+<div class="container" id="main">
+    <div class="panel panel-default" id="panel">
+        <div class="panel-body">
+            <h1>코드스쿼드 도서관에 오신 것을 환영합니다.</h1>
+            <br>
+            <p>상단의 검색 상자를 이용해 책을 검색하세요.</p>
+            <br>
+            <p>도서 정보를 확인하고, 대출을 신청하거나 누가 책을 보고 있는지 확인할 수 있습니다.</p>
+            <br>
+            <p>"대출정보관리" 버튼을 통해 로그인하신 후 대출 정보를 관리할 수 있습니다.</p>
+        </div>
+    </div>
+</div>
+{{/partial}}
 
-</head>
-<body>
-
-	{{> include/nav}}
-
-	<div class="container" id="main">
-		<div class="panel panel-default" id="panel">
-
-			<div class="panel-body">
-
-				<h1>코드스쿼드 도서관에 오신 것을 환영합니다.</h1>
-				<br>
-				<p>상단의 검색 상자를 이용해 책을 검색하세요.</p>
-				<br>
-				<p>도서 정보를 확인하고, 대출을 신청하거나 누가 책을 보고 있는지 확인할 수 있습니다.</p>
-				<br>
-				<p>"대출정보관리" 버튼을 통해 로그인하신 후 대출 정보를 관리할 수 있습니다.</p>
-
-
-			</div>
-
-
-
-		</div>
-
-
-	</div>
-
-
-
-	{{> include/footer}}
-</body>
-</html>
+{{> layout}}
