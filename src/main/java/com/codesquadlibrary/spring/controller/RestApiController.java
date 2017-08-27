@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codesquadlibrary.spring.domain.Book;
 import com.codesquadlibrary.spring.domain.User;
 import com.codesquadlibrary.spring.handler.QrCodeMaker;
+import com.codesquadlibrary.spring.repositories.BookRepository;
 import com.codesquadlibrary.spring.repositories.UserRepository;
 import com.google.zxing.WriterException;
 
@@ -25,8 +27,10 @@ public class RestApiController {
 
 	@Autowired
 	UserRepository userRepo;
-	
-	
+
+	@Autowired
+	BookRepository bookRepo;
+
 	QrCodeMaker qrMaker = new QrCodeMaker();
 
 	@GetMapping("/api/signin/generateqr/{userid}")
@@ -35,11 +39,10 @@ public class RestApiController {
 		String qrOriginalCode = user.getUniquecode();
 		try {
 			return ResponseEntity.ok().body(qrMaker.makeQr(qrOriginalCode));
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			throw new InternalServerError("Oops! Something went wrong.", e);
 		}
-		
+
 	}
 
 	@PostMapping("/api/signin/userinfo")
@@ -54,10 +57,22 @@ public class RestApiController {
 	}
 
 	@PostMapping("/api/rental/book")
-	public String rentalByApi(HttpSession session, String bookcode) {
-		return null;
+	public String rentalByApi(HttpSession session, String bookcode, String usercode) {
+		User user = userRepo.findByUniquecode(usercode);
+		Book book = bookRepo.findByUniquecode(bookcode);
+
+		if (user == null || book == null) {
+			return "api fail message";
+
+		}
+
+		book.setUser(user);
+		book.setPossessed(true);
+		bookRepo.save(book);
+		return "success message";
+
 	}
-	
+
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	public class InternalServerError extends RuntimeException {
 

@@ -14,5 +14,6 @@ public interface BookRepository extends CrudRepository<Book, Long>{
 	ArrayList<Book> findByAuthorContaining(String author);
 	ArrayList<Book> findByIsPossessedTrue();
 	Book findByUniqueid(long uniqueid);
+	Book findByUniquecode(String uniquecode);
 
 }
