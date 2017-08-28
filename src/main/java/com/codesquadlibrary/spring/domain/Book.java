@@ -119,5 +119,14 @@ public class Book {
 	public void setPossessed(boolean isPossessed) {
 		this.isPossessed = isPossessed;
 	}
+	
+	public boolean update(Book book) {
+		this.author = book.getAuthor();
+		this.title = book.getTitle();
+		this.publisher = book.getPublisher();
+		this.picturePath = null;
+		
+		return true;
+	}
 
 }

@@ -6,12 +6,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codesquadlibrary.spring.domain.User;
+import com.codesquadlibrary.spring.handler.AdminCheckingFromSession;
 import com.codesquadlibrary.spring.repositories.UserRepository;
 
 @Controller
@@ -58,10 +61,13 @@ public class UserInfoController {
 	}
 	
 	@GetMapping("/user/admin")
-	public ModelAndView getAdminPage(HttpSession session) {
+	public ModelAndView getAdminPage(@RequestParam(value = "search", required = false) String keyword, HttpSession session) {
 		ModelAndView admin = new ModelAndView("users/admin");
 		User loggedUser = (User) session.getAttribute("loginuser");
 		if (loggedUser != null && loggedUser.isAdmin()) {
+			if (keyword != null) {
+				admin.addObject("userlist", userRepo.findByNameContaining(keyword));
+			}
 			admin.addObject("userlist", userRepo.findAll());
 			return admin;
 		}
@@ -124,6 +130,39 @@ public class UserInfoController {
 		}
 		
 		return "redirect:https://s3.ap-northeast-2.amazonaws.com/codesquad-library-user/" + actualUser.getProfilePath();
+	}
+	
+	@GetMapping("/user/modify/{userid}")
+	public String getUserEditForm(@PathVariable long userid, HttpSession session, Model model) {
+		User targetUser = userRepo.findOne(userid);
+		if (AdminCheckingFromSession.isSessionedUserAdmin(session)) {
+			model.addAttribute("userinfo", targetUser);
+			return "users/modify";
+		}
+		return "users/adminfail";
+	}
+	
+	@PostMapping("/user/modify/{userid}")
+	public String getUserEditForm(@PathVariable long userid, HttpSession session, User user) {
+		User targetUser = userRepo.findOne(userid);
+		if (AdminCheckingFromSession.isSessionedUserAdmin(session)) {
+			user.setUniquecode();
+			targetUser = user;
+			userRepo.save(targetUser);
+			return "redirect:/user/" + userid;
+		}
+		return "users/adminfail";
+	}
+	
+	@GetMapping("/user/modify/setadmin/{userid}")
+	public String setUserAsAdmin(@PathVariable long userid, HttpSession session) {
+		User targetUser = userRepo.findOne(userid);
+		if (AdminCheckingFromSession.isSessionedUserAdmin(session)) {
+			targetUser.setAdmin(true);
+			userRepo.save(targetUser);
+			return "redirect:/user/admin";
+		}
+		return "users/adminfail";
 	}
 
 }

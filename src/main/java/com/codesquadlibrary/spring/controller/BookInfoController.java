@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.codesquadlibrary.spring.domain.Book;
 import com.codesquadlibrary.spring.domain.User;
+import com.codesquadlibrary.spring.handler.AdminCheckingFromSession;
 import com.codesquadlibrary.spring.handler.ImageRequestHandler;
 import com.codesquadlibrary.spring.handler.RandomStringGenerator;
 import com.codesquadlibrary.spring.repositories.BookRepository;
@@ -46,6 +47,21 @@ public class BookInfoController {
 		return listPage;
 	}
 
+	@GetMapping("/books/admin")
+	public ModelAndView getAdminBooksPage(@RequestParam(value = "search", required = false) String keyword,
+			HttpSession session) {
+
+		if (AdminCheckingFromSession.isSessionedUserAdmin(session) == false) {
+			return new ModelAndView("users/adminfail");
+		}
+		ModelAndView bookAdminPage = new ModelAndView("books/adminlist");
+		if (keyword != null) {
+			bookAdminPage.addObject("booklist", bookRepo.findByTitleContaining(keyword));
+		}
+		bookAdminPage.addObject("booklist", bookRepo.findAll());
+		return bookAdminPage;
+	}
+
 	@GetMapping("/books/{uniqueId}")
 	public ModelAndView showBookDetail(@PathVariable long uniqueId) {
 
@@ -64,7 +80,7 @@ public class BookInfoController {
 		}
 		User actualUser = userRepo.findOne(loggedUser.getUserid());
 		Book selectedBook = bookRepo.findByUniqueid(uniqueId);
-		
+
 		if (selectedBook.isPossessed()) {
 			return "books/renterror";
 		}
@@ -92,7 +108,7 @@ public class BookInfoController {
 		bookRepo.save(returnBook);
 		return "books/returnsuccess";
 	}
-	
+
 	@GetMapping("/books/{uniqueId}/modify")
 	public String modifyBook(@PathVariable long uniqueId, Model model, HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loginuser");
@@ -119,7 +135,7 @@ public class BookInfoController {
 		String dest = book.getPicturePath();
 		return "redirect:https://s3.ap-northeast-2.amazonaws.com/codesquad-library-book/" + dest;
 	}
-	
+
 	@GetMapping("/books/new")
 	public String getNewBookForm(HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loginuser");
@@ -128,13 +144,23 @@ public class BookInfoController {
 		}
 		return "users/adminfail";
 	}
-	
 
 	@PostMapping("/books/new")
 	public String newBook(Book book) {
 		book.setPossessed(false);
 		bookRepo.save(book);
 
+		return "redirect:/";
+	}
+
+	@PostMapping("/books/{uniqueId}/modify")
+	public String editBook(@PathVariable long uniqueId, Book book) {
+		Book originalBook = bookRepo.findOne(uniqueId);
+		if (originalBook.update(book)) {
+
+			bookRepo.save(originalBook);
+			return "redirect:/books/admin";
+		}
 		return "redirect:/";
 	}
 
@@ -160,7 +186,7 @@ public class BookInfoController {
 		String filename = RandomStringGenerator.randomStringFactory(10);
 		byte[] uploadedBytes = fileUpload.getBytes();
 		BufferedImage img = ImageIO.read(new ByteArrayInputStream(uploadedBytes));
-		
+
 		File outfile = new File("/tmp/" + filename + ".jpg");
 		ImageIO.write(img, "jpg", outfile);
 		book.setPicturePath(filename);

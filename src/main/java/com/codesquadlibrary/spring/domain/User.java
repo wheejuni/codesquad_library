@@ -23,7 +23,7 @@ public class User {
 	@Column(nullable = true)
 	private boolean isAdmin;
 	
-	@Column(nullable = false, unique = true, length = 25)
+	@Column(nullable = false, unique = false, length = 25)
 	private String name;
 	
 	@Column(nullable = false, unique = true, length = 25)
