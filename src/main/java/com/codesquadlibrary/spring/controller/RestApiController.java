@@ -1,17 +1,25 @@
 package com.codesquadlibrary.spring.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,16 +41,18 @@ public class RestApiController {
 	BookRepository bookRepo;
 
 	QrCodeMaker qrMaker = new QrCodeMaker();
-
+	
+	@ResponseBody
 	@GetMapping("/api/signin/generateqr/{userid}")
-	public ResponseEntity<byte[]> getQrCode(@PathVariable long userid) {
+	public HttpEntity getQrCode(HttpServletResponse response, @PathVariable long userid) throws IOException, WriterException {
 		User user = userRepo.findOne(userid);
 		String qrOriginalCode = user.getUniquecode();
-		try {
-			return ResponseEntity.ok().body(qrMaker.makeQr(qrOriginalCode));
-		} catch (Exception e) {
-			throw new InternalServerError("Oops! Something went wrong.", e);
-		}
+		//ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		InputStream getQrByteArray = new ByteArrayInputStream(qrMaker.makeQr(qrOriginalCode));
+		StreamUtils.copy(getQrByteArray, response.getOutputStream());
+		response.setContentType(MediaType.IMAGE_PNG_VALUE);
+		
+		return new ResponseEntity(HttpStatus.OK);
 
 	}
 
